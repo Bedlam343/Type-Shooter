@@ -1,10 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import { createRoot } from 'react-dom/client';
+import { Canvas } from '@react-three/fiber';
+import './index.css';
+import Scene from 'src/Scene';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const root = createRoot(document.getElementById('root')!);
+
+root.render(
+  <Canvas
+    gl={{ alpha: true }} // scene background color transparent
+    orthographic
+    camera={{
+      zoom: 100,
+      position: [0, 0, 100],
+    }}
+  >
+    <Scene />
+  </Canvas>
+);
