@@ -1,4 +1,3 @@
-import { animated } from '@react-spring/three';
 import { useEffect, useRef, useState } from 'react';
 import { Bullet } from 'src/types';
 import BulletSpring from 'src/components/Bullet';
@@ -9,13 +8,14 @@ const Scene = () => {
 
   console.log('Scene re-render');
 
+  // shoot bullets when keys are pressed
   useEffect(() => {
     const shootBullet = (event: KeyboardEvent) => {
       if (keyMap.current[event.code]) return;
 
       keyMap.current[event.code] = true;
       const bullet: Bullet = {
-        id: new Date().toISOString(),
+        id: `${new Date().toISOString()}-${event.code}`,
         initialPosition: { x: 0, y: -4, z: 0 },
         targetPosition: { x: Math.random() * -4 + 2, y: 4, z: 0 },
       };
@@ -43,10 +43,10 @@ const Scene = () => {
 
   return (
     <>
-      <animated.mesh position-y={-4} position-z={0}>
+      <mesh position-y={-4} position-z={0}>
         <sphereGeometry args={[0.2]} />
         <meshBasicMaterial color="orange" />
-      </animated.mesh>
+      </mesh>
 
       {bullets.map((bullet) => (
         <BulletSpring key={bullet.id} bullet={bullet} onImpact={removeBullet} />
