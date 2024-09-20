@@ -11,11 +11,13 @@ const Scene = () => {
   // shoot bullets when keys are pressed
   useEffect(() => {
     const shootBullet = (event: KeyboardEvent) => {
-      if (keyMap.current[event.code]) return;
+      const key = event.key.toLowerCase();
+      if (event.keyCode < 65 || event.keyCode > 90) return;
+      if (keyMap.current[key]) return;
 
-      keyMap.current[event.code] = true;
+      keyMap.current[key] = true;
       const bullet: Bullet = {
-        id: `${new Date().toISOString()}-${event.code}`,
+        id: `${new Date().toISOString()}-${key}`,
         initialPosition: { x: 0, y: -4, z: 0 },
         targetPosition: { x: Math.random() * -4 + 2, y: 4, z: 0 },
       };
@@ -23,7 +25,8 @@ const Scene = () => {
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
-      keyMap.current[event.code] = false;
+      const key = event.key.toLowerCase();
+      keyMap.current[key] = false;
     };
 
     document.addEventListener('keydown', shootBullet);
