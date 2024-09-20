@@ -1,21 +1,39 @@
 import { animated } from '@react-spring/three';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Bullet } from 'src/types';
 import BulletSpring from 'src/components/Bullet';
 
 const Scene = () => {
+  const keyMap = useRef<{ [key: string]: boolean }>({});
   const [bullets, setBullets] = useState<Bullet[]>([]);
 
   console.log('Scene re-render');
 
-  const shootBullet = () => {
-    const bullet: Bullet = {
-      id: new Date().toISOString(),
-      initialPosition: { x: 0, y: -4, z: 0 },
-      targetPosition: { x: Math.random() * -4 + 2, y: 4, z: 0 },
+  useEffect(() => {
+    const shootBullet = (event: KeyboardEvent) => {
+      if (keyMap.current[event.code]) return;
+
+      keyMap.current[event.code] = true;
+      const bullet: Bullet = {
+        id: new Date().toISOString(),
+        initialPosition: { x: 0, y: -4, z: 0 },
+        targetPosition: { x: Math.random() * -4 + 2, y: 4, z: 0 },
+      };
+      setBullets((prevBullets) => [...prevBullets, bullet]);
     };
-    setBullets((prevBullets) => [...prevBullets, bullet]);
-  };
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      keyMap.current[event.code] = false;
+    };
+
+    document.addEventListener('keydown', shootBullet);
+    document.addEventListener('keyup', handleKeyUp);
+
+    return () => {
+      document.removeEventListener('keydown', shootBullet);
+      document.removeEventListener('keyup', handleKeyUp);
+    };
+  }, []);
 
   const removeBullet = (bulletId: string) => {
     setBullets((prevBullets) =>
@@ -25,11 +43,7 @@ const Scene = () => {
 
   return (
     <>
-      <animated.mesh
-        position-y={-4}
-        position-z={0}
-        onPointerMissed={shootBullet}
-      >
+      <animated.mesh position-y={-4} position-z={0}>
         <sphereGeometry args={[0.2]} />
         <meshBasicMaterial color="orange" />
       </animated.mesh>
