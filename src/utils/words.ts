@@ -1,4 +1,4 @@
-export const WORDS = {
+export const WORDS: { [key: number]: string[] } = {
   2: [
     'aa',
     'ab',

@@ -1,0 +1,65 @@
+import { CONFIG } from 'src/utils/config';
+import { Enemy, EnemyDictionary } from 'src/types';
+import { WORDS } from 'src/utils/words';
+import { randomNumber, randomPosition } from 'src/utils/helpers';
+import { ownshipPosition } from 'src/utils/constants';
+
+export const generateEnemies = (wave: number): EnemyDictionary => {
+  const enemies: EnemyDictionary = {};
+  const config = CONFIG[1];
+
+  if (config) {
+    const {
+      numEnemies,
+      minWordLength,
+      maxWordLength,
+      minSpeed,
+      maxSpeed,
+      maxSpawnDelay,
+    } = config;
+
+    for (let i = 0; i < numEnemies; ++i) {
+      let tries = 3;
+      let word: string = '';
+
+      while (tries > 0 && !word) {
+        let length: number = -1;
+
+        while (!WORDS[length]) {
+          // make sure index is valid
+          length = randomNumber(minWordLength, maxWordLength);
+        }
+
+        const words = WORDS[length];
+        const index = randomNumber(0, words.length - 1);
+
+        if (!enemies[words[index]]) {
+          // if word not alreadt assigned to another enemy, take it
+          word = words[index];
+        }
+
+        --tries;
+      }
+
+      if (word) {
+        const enemy: Enemy = {
+          id: word,
+          initialPosition: { ...randomPosition(3.5, 4) },
+          targetPosition: { ...ownshipPosition },
+          word,
+          attackIndex: 0,
+          speed: randomNumber(minSpeed, maxSpeed),
+          delay: randomNumber(0, maxSpawnDelay),
+        };
+        enemies[word] = enemy;
+      } else {
+        console.error('Failed to find word to assign to enemy');
+        continue;
+      }
+    }
+  } else {
+    console.error('Configuration not found for wave', wave);
+  }
+
+  return enemies;
+};

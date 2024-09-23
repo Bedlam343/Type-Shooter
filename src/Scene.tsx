@@ -1,130 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { Physics, RigidBody } from '@react-three/rapier';
 import { OrbitControls } from '@react-three/drei';
-import { Bullet, Enemy, Position } from 'src/types';
-import { WORDS } from 'src/utils/words';
-import EnemyUI from 'src/components/Enemy';
-import { randomPosition } from 'src/utils/helpers';
+import { EnemyDictionary } from 'src/types';
+import Wave from './components/Wave';
+import { generateEnemies } from './utils';
 
 const Scene = () => {
-  const wordLengths = Object.keys(WORDS);
-
-  const keyMap = useRef<{ [key: string]: boolean }>({});
-  const enemyInitials = useRef<Set<string>>(new Set());
-  // const enemyPositions = useRef<{ [key: string]: Position }>({});
-  const currentEnemy = useRef<Enemy | null>(null);
-
-  // const [bullets, setBullets] = useState<Bullet[]>([]);
-
-  // story enemy with a key equal to its word's initial
-  const [enemies, setEnemies] = useState<{ [key: string]: Enemy }>({});
+  const [wave, setWave] = useState<number>(1);
+  const [enemies, setEnemies] = useState<EnemyDictionary>(
+    generateEnemies(wave)
+  );
 
   console.log('Scene re-render');
-
-  // generate enemy every 5 seconds
-  useEffect(() => {
-    const generateEnemy = () => {
-      // find word to assign enemy
-      let word: string | null = null;
-      while (!word) {
-        const index = Math.floor(Math.random() * (WORDS[10].length - 1));
-        const foundWord = WORDS[10][index];
-        if (!enemyInitials.current.has(foundWord[0])) {
-          word = foundWord;
-        }
-      }
-
-      if (!word) {
-        console.error('Enemy could not be created. No available word.');
-        return;
-      }
-
-      const initial = word[0];
-      const { x, y } = randomPosition(3.5, 4);
-
-      const enemy: Enemy = {
-        id: `${new Date().toISOString()}_${Math.random()}`,
-        initialPosition: { x, y, z: 0 },
-        targetPosition: { x: 0, y: 0, z: 0 },
-        word,
-        attackIndex: 0,
-      };
-      setEnemies((prevEnemies) => ({ ...prevEnemies, [initial]: enemy }));
-      enemyInitials.current.add(word[0]);
-    };
-
-    const interval = setInterval(generateEnemy, 5000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // shoot bullets when keys are pressed
-  useEffect(() => {
-    const shootBullet = (event: KeyboardEvent) => {
-      const key = event.key.toLowerCase();
-      if (event.keyCode < 65 || event.keyCode > 90) return;
-      if (keyMap.current[key]) return;
-
-      // get position of enemy
-      // const targetPosition = enemyPositions.current[key];
-      // if (!targetPosition) return;
-
-      keyMap.current[key] = true;
-
-      const enemy = currentEnemy.current || enemies[key];
-      if (!enemy) return;
-
-      const { attackIndex, word } = enemy;
-
-      if (word[attackIndex] === key) {
-        if (attackIndex + 1 === word.length) {
-          // all letters typed...destroy enemy
-          currentEnemy.current = null;
-          setEnemies((prevEnemies) => {
-            const newEnemies = { ...prevEnemies };
-            delete newEnemies[word[0]];
-            return newEnemies;
-          });
-          enemyInitials.current.delete(word[0]);
-        } else {
-          // update attack index pertaining to the word
-          const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };
-          setEnemies((prevEnemies) => ({
-            ...prevEnemies,
-            [word[0]]: updatedEnemy,
-          }));
-          currentEnemy.current = updatedEnemy;
-        }
-      }
-
-      /* const bullet: Bullet = {
-        id: `${new Date().toISOString()}-${key}`,
-        initialPosition: { x: 0, y: -4, z: 0 },
-        targetPosition,
-      }; */
-      // setBullets((prevBullets) => [...prevBullets, bullet]);
-    };
-
-    const handleKeyUp = (event: KeyboardEvent) => {
-      const key = event.key.toLowerCase();
-      keyMap.current[key] = false;
-    };
-
-    document.addEventListener('keydown', shootBullet);
-    document.addEventListener('keyup', handleKeyUp);
-
-    return () => {
-      document.removeEventListener('keydown', shootBullet);
-      document.removeEventListener('keyup', handleKeyUp);
-    };
-  }, [enemies]);
-
-  // remove bullet from the DOM
-  /* const unmountBullet = (bulletId: string) => {
-    setBullets((prevBullets) =>
-      prevBullets.filter((bullet) => bullet.id !== bulletId)
-    );
-  }; */
 
   const collisionHandler = () => {
     console.log('sphere-collision');
@@ -147,17 +34,7 @@ const Scene = () => {
         </mesh>
       </RigidBody>
 
-      {/* {bullets.map((bullet) => (
-        <BulletSpring
-          key={bullet.id}
-          bullet={bullet}
-          onImpact={unmountBullet}
-        />
-      ))} */}
-
-      {Object.keys(enemies).map((key) => (
-        <EnemyUI key={key} enemy={enemies[key]} />
-      ))}
+      <Wave waveEnemies={enemies} waveNumber={wave} />
     </Physics>
   );
 };

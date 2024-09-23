@@ -11,10 +11,27 @@ export type Enemy = {
   targetPosition: { x: number; y: number; z: number };
   word: string;
   attackIndex: number;
+  speed: number;
+  delay: number;
+};
+
+export type EnemyDictionary = {
+  [key: string]: Enemy;
 };
 
 export type Position = {
   x: number;
   y: number;
   z: number;
+};
+
+export type Config = {
+  [key: number]: {
+    numEnemies: number;
+    minWordLength: number;
+    maxWordLength: number;
+    minSpeed: number;
+    maxSpeed: number;
+    maxSpawnDelay: number;
+  };
 };
