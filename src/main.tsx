@@ -12,6 +12,7 @@ root.render(
     camera={{
       zoom: 100,
       position: [0, 0, 100],
+      // position: [1, -6, 0],
     }}
   >
     <Scene />
