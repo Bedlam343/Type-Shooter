@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
+import { Physics, RigidBody } from '@react-three/rapier';
+import { OrbitControls } from '@react-three/drei';
 import { Bullet, Enemy, Position } from 'src/types';
 import { WORDS } from 'src/utils/words';
 import EnemyUI from 'src/components/Enemy';
-import { Physics, RigidBody } from '@react-three/rapier';
-import { OrbitControls } from '@react-three/drei';
+import { randomPosition } from 'src/utils/helpers';
 
 const Scene = () => {
   const wordLengths = Object.keys(WORDS);
@@ -39,10 +40,12 @@ const Scene = () => {
       }
 
       const initial = word[0];
+      const { x, y } = randomPosition(3.5, 4);
+
       const enemy: Enemy = {
         id: `${new Date().toISOString()}_${Math.random()}`,
-        initialPosition: { x: Math.random() * -8 + 4, y: 4, z: 0 },
-        targetPosition: { x: 0, y: -4, z: 0 },
+        initialPosition: { x, y, z: 0 },
+        targetPosition: { x: 0, y: 0, z: 0 },
         word,
         attackIndex: 0,
       };
@@ -138,7 +141,7 @@ const Scene = () => {
         collisionGroups={0x0001}
         onCollisionEnter={collisionHandler}
       >
-        <mesh position-y={-4} position-z={0}>
+        <mesh position-y={0} position-z={0}>
           <sphereGeometry args={[0.2]} />
           <meshBasicMaterial color="orange" />
         </mesh>
