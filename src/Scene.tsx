@@ -6,6 +6,8 @@ import { Physics, RigidBody } from '@react-three/rapier';
 import { OrbitControls } from '@react-three/drei';
 
 const Scene = () => {
+  const wordLengths = Object.keys(WORDS);
+
   const keyMap = useRef<{ [key: string]: boolean }>({});
   const enemyInitials = useRef<Set<string>>(new Set());
   // const enemyPositions = useRef<{ [key: string]: Position }>({});
@@ -22,7 +24,14 @@ const Scene = () => {
   useEffect(() => {
     const generateEnemy = () => {
       // find word to assign enemy
-      const word = WORDS.find((w) => !enemyInitials.current.has(w[0]));
+      let word: string | null = null;
+      while (!word) {
+        const index = Math.floor(Math.random() * (WORDS[10].length - 1));
+        const foundWord = WORDS[10][index];
+        if (!enemyInitials.current.has(foundWord[0])) {
+          word = foundWord;
+        }
+      }
 
       if (!word) {
         console.error('Enemy could not be created. No available word.');
@@ -65,7 +74,6 @@ const Scene = () => {
       const { attackIndex, word } = enemy;
 
       if (word[attackIndex] === key) {
-        console.log('fire', key);
         if (attackIndex + 1 === word.length) {
           // all letters typed...destroy enemy
           currentEnemy.current = null;
@@ -76,7 +84,7 @@ const Scene = () => {
           });
           enemyInitials.current.delete(word[0]);
         } else {
-          // update attack index
+          // update attack index pertaining to the word
           const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };
           setEnemies((prevEnemies) => ({
             ...prevEnemies,
