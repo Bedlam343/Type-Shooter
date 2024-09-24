@@ -4,6 +4,7 @@ import EnemyUI from 'src/components/Enemy';
 import Laser from 'src/components/Laser';
 import { Dictionary, Enemy, Position } from 'src/types';
 import { OWNSHIP_POSITION } from 'src/utils/constants';
+import { closestEnemyWithInitial } from 'src/utils/helpers';
 
 type WaveProps = {
   waveEnemies: Dictionary<Enemy>;
@@ -42,11 +43,10 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
 
       enemy = currentEnemy.current;
     } else {
-      const newEnemy = Object.keys(enemiesRef.current).find(
-        (word) => word[0] === key && enemyPositions.current[word]
-      );
-      if (!newEnemy) return;
-      enemy = enemiesRef.current[newEnemy];
+      // select new closest enemy starting with the pressed key
+      const closestEnemy = closestEnemyWithInitial(key, enemyPositions.current);
+      if (!closestEnemy) return;
+      enemy = enemiesRef.current[closestEnemy];
     }
 
     const { attackIndex, word } = enemy;
@@ -61,6 +61,7 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
           return newEnemies;
         });
         delete enemiesRef.current[word];
+        delete enemyPositions.current[word];
 
         // end of wave
         // onEnd();
