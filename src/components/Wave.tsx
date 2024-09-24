@@ -1,20 +1,25 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import useKeyboard from 'src/hooks/useKeyboard';
 import EnemyUI from 'src/components/Enemy';
-import { Enemy, EnemyDictionary } from 'src/types';
+import Laser from 'src/components/Laser';
+import { Dictionary, Enemy, Position } from 'src/types';
+import { OWNSHIP_POSITION } from 'src/utils/constants';
 
 type WaveProps = {
-  waveEnemies: EnemyDictionary;
+  waveEnemies: Dictionary<Enemy>;
   waveNumber: number;
   onStart?: () => void;
   onEnd?: () => void;
 };
 
 const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
-  const [enemies, setEnemies] = useState<EnemyDictionary>({ ...waveEnemies });
-  const currentEnemy = useRef<Enemy | null>(null);
+  const [enemies, setEnemies] = useState<Dictionary<Enemy>>({ ...waveEnemies });
 
-  useKeyboard((pressedKey: string, keySet: Set<string>) => {
+  const enemiesRef = useRef<Dictionary<Enemy>>({ ...waveEnemies });
+  const currentEnemy = useRef<Enemy | null>(null);
+  const enemyPositions = useRef<Dictionary<Position>>({});
+
+  const attack = useCallback((pressedKey: string, keySet: Set<string>) => {
     const key = pressedKey.toLowerCase();
     if (key < 'a' || key > 'z') return;
     if (keySet.has(key)) return;
@@ -23,9 +28,11 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
     if (currentEnemy.current) {
       enemy = currentEnemy.current;
     } else {
-      const newEnemy = Object.keys(enemies).find((word) => word[0] === key);
+      const newEnemy = Object.keys(enemiesRef.current).find(
+        (word) => word[0] === key
+      );
       if (!newEnemy) return;
-      enemy = enemies[newEnemy];
+      enemy = enemiesRef.current[newEnemy];
     }
 
     const { attackIndex, word } = enemy;
@@ -39,6 +46,10 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
           delete newEnemies[word];
           return newEnemies;
         });
+        delete enemiesRef.current[word];
+
+        // end of wave
+        // onEnd();
       } else {
         // update attack index pertaining to the word
         const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };
@@ -49,13 +60,21 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
         currentEnemy.current = updatedEnemy;
       }
     }
-  });
+  }, []);
+
+  useKeyboard(attack);
 
   return (
     <>
       {Object.keys(enemies).map((key) => (
-        <EnemyUI key={key} enemy={enemies[key]} />
+        <EnemyUI key={key} enemy={enemies[key]} ref={enemyPositions} />
       ))}
+
+      <Laser
+        source={OWNSHIP_POSITION}
+        target={currentEnemy.current?.word}
+        enemyPositions={enemyPositions}
+      />
     </>
   );
 };

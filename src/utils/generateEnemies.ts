@@ -1,11 +1,11 @@
 import { CONFIG } from 'src/utils/config';
-import { Enemy, EnemyDictionary } from 'src/types';
+import { Enemy, Dictionary } from 'src/types';
 import { WORDS } from 'src/utils/words';
 import { randomNumber, randomPosition } from 'src/utils/helpers';
-import { ownshipPosition } from 'src/utils/constants';
+import { OWNSHIP_POSITION } from 'src/utils/constants';
 
-export const generateEnemies = (wave: number): EnemyDictionary => {
-  const enemies: EnemyDictionary = {};
+export const generateEnemies = (wave: number): Dictionary<Enemy> => {
+  const enemies: Dictionary<Enemy> = {};
   const config = CONFIG[1];
 
   if (config) {
@@ -45,7 +45,7 @@ export const generateEnemies = (wave: number): EnemyDictionary => {
         const enemy: Enemy = {
           id: word,
           initialPosition: { ...randomPosition(3.5, 4) },
-          targetPosition: { ...ownshipPosition },
+          targetPosition: { ...OWNSHIP_POSITION },
           word,
           attackIndex: 0,
           speed: randomNumber(minSpeed, maxSpeed),

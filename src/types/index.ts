@@ -15,8 +15,8 @@ export type Enemy = {
   delay: number;
 };
 
-export type EnemyDictionary = {
-  [key: string]: Enemy;
+export type Dictionary<T> = {
+  [key: string]: T;
 };
 
 export type Position = {

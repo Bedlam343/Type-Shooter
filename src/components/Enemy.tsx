@@ -1,14 +1,14 @@
 import { animated, useSpring } from '@react-spring/three';
-import { Html, Text } from '@react-three/drei';
+import { Html } from '@react-three/drei';
 import { forwardRef, Ref, useState } from 'react';
-import { Enemy as EnemyType, Position } from 'src/types';
+import { Dictionary, Enemy as EnemyType, Position } from 'src/types';
 
 type EnemyProps = {
   enemy: EnemyType;
 };
 
 const Enemy = forwardRef(
-  ({ enemy }: EnemyProps, ref: Ref<{ [key: string]: Position }>) => {
+  ({ enemy }: EnemyProps, enemyPositions: Ref<Dictionary<Position>>) => {
     const [animatedStarted, setAnimationStarted] = useState<boolean>(false);
 
     const { initialPosition, targetPosition, word, attackIndex, delay, speed } =
@@ -26,11 +26,15 @@ const Enemy = forwardRef(
       },
       delay,
       onStart: () => setAnimationStarted(true),
-    });
+      onChange(result) {
+        const { value, finished, cancelled } = result;
+        const { x, y, z } = value;
+        if (!enemyPositions) return;
 
-    // update position
-    // @ts-expect-error ...
-    // ref.current[enemy.word[0]] = { x: x.get(), y: y.get(), z: z.get() };
+        // update position of enemy
+        enemyPositions.current[word] = { x, y, z };
+      },
+    });
 
     return (
       <>
