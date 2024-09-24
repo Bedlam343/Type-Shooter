@@ -29,7 +29,7 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
       enemy = currentEnemy.current;
     } else {
       const newEnemy = Object.keys(enemiesRef.current).find(
-        (word) => word[0] === key
+        (word) => word[0] === key && enemyPositions.current[word]
       );
       if (!newEnemy) return;
       enemy = enemiesRef.current[newEnemy];
