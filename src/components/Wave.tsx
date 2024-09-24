@@ -21,11 +21,25 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
 
   const attack = useCallback((pressedKey: string, keySet: Set<string>) => {
     const key = pressedKey.toLowerCase();
-    if (key < 'a' || key > 'z') return;
+    const keyCode = key.charCodeAt(0);
     if (keySet.has(key)) return;
+
+    if (key.length > 1 && key !== 'escape') return;
+    if (keyCode < 'a'.charCodeAt(0) || keyCode > 'z'.charCodeAt(0)) return;
 
     let enemy: Enemy;
     if (currentEnemy.current) {
+      if (key === 'escape') {
+        // disengage lock from enemy
+        const resetEnemy = { ...currentEnemy.current, attackIndex: 0 };
+        setEnemies((prevEnemies) => ({
+          ...prevEnemies,
+          [resetEnemy.word]: { ...resetEnemy },
+        }));
+        currentEnemy.current = null;
+        return;
+      }
+
       enemy = currentEnemy.current;
     } else {
       const newEnemy = Object.keys(enemiesRef.current).find(

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Physics, RigidBody } from '@react-three/rapier';
+import { Physics } from '@react-three/rapier';
 import { OrbitControls } from '@react-three/drei';
 import Wave from 'src/components/Wave';
 import { Dictionary, Enemy } from 'src/types';
