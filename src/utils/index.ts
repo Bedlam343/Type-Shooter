@@ -1,3 +1,4 @@
 import { generateEnemies } from './generateEnemies';
+import { nTries } from './nTries';
 
-export { generateEnemies };
+export { generateEnemies, nTries };

@@ -1,6 +1,7 @@
 import { CONFIG } from 'src/utils/config';
 import { Enemy, Dictionary } from 'src/types';
 import { WORDS } from 'src/utils/words';
+import { nTries } from 'src/utils/nTries';
 import { randomBoundaryPosition, randomNumber } from 'src/utils/helpers';
 import { OWNSHIP_POSITION } from 'src/utils/constants';
 
@@ -19,12 +20,10 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
     } = config;
 
     for (let i = 0; i < numEnemies; ++i) {
-      let tries = 3;
       let word: string = '';
 
-      while (tries > 0 && !word) {
+      nTries(() => {
         let length: number = -1;
-
         while (!WORDS[length]) {
           // make sure index is valid
           length = randomNumber(minWordLength, maxWordLength);
@@ -36,14 +35,14 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
         if (!enemies[words[index]]) {
           // if word not alreadt assigned to another enemy, take it
           word = words[index];
-        }
 
-        --tries;
-      }
+          return true;
+        }
+        return false;
+      }, 3);
 
       if (word) {
         const initialPosition = randomBoundaryPosition(7, 8);
-        console.log(initialPosition);
         const enemy: Enemy = {
           id: word,
           initialPosition,
