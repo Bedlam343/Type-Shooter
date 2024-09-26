@@ -36,28 +36,17 @@ export const closestEnemyWithInitial = (
   initial: string,
   enemyPositions: Dictionary<Position>
 ): string | null => {
-  const potentialEnemies: string[] = [];
+  let closestEnemy: string | null = null;
+  let smallestDistance: number = Infinity;
   Object.keys(enemyPositions).forEach((word) => {
     if (word[0] === initial) {
-      potentialEnemies.push(word);
+      const currDistance = distanceToOwnship(enemyPositions[word]);
+      if (currDistance < smallestDistance) {
+        closestEnemy = word;
+        smallestDistance = currDistance;
+      }
     }
   });
-
-  if (potentialEnemies.length === 0) return null;
-
-  // select closest enemy
-  let closestEnemy: string = potentialEnemies[0];
-  let smallestDistance: number = distanceToOwnship(
-    enemyPositions[closestEnemy]
-  );
-  for (let i = 1; i < potentialEnemies.length; ++i) {
-    const currEnemy = potentialEnemies[i];
-    const currDistance = distanceToOwnship(enemyPositions[currEnemy]);
-    if (currDistance < smallestDistance) {
-      closestEnemy = currEnemy;
-      smallestDistance = currDistance;
-    }
-  }
 
   return closestEnemy;
 };

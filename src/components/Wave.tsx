@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useKeyboard from 'src/hooks/useKeyboard';
 import EnemyUI from 'src/components/Enemy';
 import Laser from 'src/components/Laser';
@@ -17,8 +17,19 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>({ ...waveEnemies });
 
   const enemiesRef = useRef<Dictionary<Enemy>>({ ...waveEnemies });
-  const currentEnemy = useRef<Enemy | null>(null);
-  const enemyPositions = useRef<Dictionary<Position>>({});
+  const currentEnemyRef = useRef<Enemy | null>(null);
+  const enemyPositionsRef = useRef<Dictionary<Position>>({});
+  useEffect(() => {
+    // initial all positions to null
+    Object.keys(waveEnemies).forEach(
+      (word) =>
+        (enemyPositionsRef.current[word] = {
+          x: Infinity,
+          y: Infinity,
+          z: Infinity,
+        })
+    );
+  }, [waveEnemies]);
 
   const attack = useCallback((pressedKey: string, keySet: Set<string>) => {
     const key = pressedKey.toLowerCase();
@@ -29,24 +40,33 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
     if (keyCode < 'a'.charCodeAt(0) || keyCode > 'z'.charCodeAt(0)) return;
 
     let enemy: Enemy;
-    if (currentEnemy.current) {
+    if (currentEnemyRef.current) {
+      // an enemy already under attack
       if (key === 'escape') {
         // disengage lock from enemy
-        const resetEnemy = { ...currentEnemy.current, attackIndex: 0 };
+        const resetEnemy = { ...currentEnemyRef.current, attackIndex: 0 };
         setEnemies((prevEnemies) => ({
           ...prevEnemies,
           [resetEnemy.word]: { ...resetEnemy },
         }));
-        currentEnemy.current = null;
+        currentEnemyRef.current = null;
         return;
       }
 
-      enemy = currentEnemy.current;
+      enemy = currentEnemyRef.current;
     } else {
       // select new closest enemy starting with the pressed key
-      const closestEnemy = closestEnemyWithInitial(key, enemyPositions.current);
+      const closestEnemy = closestEnemyWithInitial(
+        key,
+        enemyPositionsRef.current
+      );
       if (!closestEnemy) return;
       enemy = enemiesRef.current[closestEnemy];
+    }
+
+    if (!enemy) {
+      console.error('Cant find enemy with letter', key, enemiesRef.current);
+      return;
     }
 
     const { attackIndex, word } = enemy;
@@ -54,14 +74,15 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
     if (word[attackIndex] === key) {
       if (attackIndex + 1 === word.length) {
         // all letters typed...destroy enemy
-        currentEnemy.current = null;
+        currentEnemyRef.current = null;
+        delete enemiesRef.current[word];
+        delete enemyPositionsRef.current[word];
+
         setEnemies((prevEnemies) => {
           const newEnemies = { ...prevEnemies };
           delete newEnemies[word];
           return newEnemies;
         });
-        delete enemiesRef.current[word];
-        delete enemyPositions.current[word];
 
         // end of wave
         // onEnd();
@@ -72,7 +93,7 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
           ...prevEnemies,
           [word]: updatedEnemy,
         }));
-        currentEnemy.current = updatedEnemy;
+        currentEnemyRef.current = updatedEnemy;
       }
     }
   }, []);
@@ -82,13 +103,13 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
   return (
     <>
       {Object.keys(enemies).map((key) => (
-        <EnemyUI key={key} enemy={enemies[key]} ref={enemyPositions} />
+        <EnemyUI key={key} enemy={enemies[key]} ref={enemyPositionsRef} />
       ))}
 
       <Laser
         source={OWNSHIP_POSITION}
-        target={currentEnemy.current?.word}
-        enemyPositions={enemyPositions}
+        target={currentEnemyRef.current?.word}
+        enemyPositions={enemyPositionsRef}
       />
     </>
   );

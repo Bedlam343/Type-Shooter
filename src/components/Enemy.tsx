@@ -29,7 +29,8 @@ const Enemy = forwardRef(
       onChange(result) {
         const { value, finished, cancelled } = result;
         const { x, y, z } = value;
-        if (!enemyPositions) return;
+
+        if (!enemyPositions || !enemyPositions.current[word]) return;
 
         // update position of enemy
         enemyPositions.current[word] = { x, y, z };
