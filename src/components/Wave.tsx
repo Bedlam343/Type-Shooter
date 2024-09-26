@@ -10,7 +10,7 @@ type WaveProps = {
   waveEnemies: Dictionary<Enemy>;
   waveNumber: number;
   onStart?: () => void;
-  onEnd?: () => void;
+  onEnd: () => void;
 };
 
 const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
@@ -30,6 +30,12 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
         })
     );
   }, [waveEnemies]);
+
+  useEffect(() => {
+    if (Object.keys(enemies).length === 0) {
+      onEnd();
+    }
+  }, [enemies, onEnd]);
 
   const attack = useCallback((pressedKey: string, keySet: Set<string>) => {
     const key = pressedKey.toLowerCase();
@@ -83,9 +89,6 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
           delete newEnemies[word];
           return newEnemies;
         });
-
-        // end of wave
-        // onEnd();
       } else {
         // update attack index pertaining to the word
         const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };

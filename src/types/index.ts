@@ -30,8 +30,8 @@ export type Config = {
     numEnemies: number;
     minWordLength: number;
     maxWordLength: number;
-    minSpeed: number;
-    maxSpeed: number;
+    minDuration: number;
+    maxDuration: number;
     maxSpawnDelay: number;
   };
 };

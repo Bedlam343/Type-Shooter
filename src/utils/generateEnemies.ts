@@ -1,21 +1,18 @@
-import { CONFIG } from 'src/utils/config';
 import { Enemy, Dictionary } from 'src/types';
-import { WORDS } from 'src/utils/words';
-import { nTries } from 'src/utils/nTries';
+import { nTries, CONFIG, OWNSHIP_POSITION, WORDS } from 'src/utils';
 import { randomBoundaryPosition, randomNumber } from 'src/utils/helpers';
-import { OWNSHIP_POSITION } from 'src/utils/constants';
 
 export const generateEnemies = (wave: number): Dictionary<Enemy> => {
   const enemies: Dictionary<Enemy> = {};
-  const config = CONFIG[1];
+  const config = CONFIG[wave];
 
   if (config) {
     const {
       numEnemies,
       minWordLength,
       maxWordLength,
-      minSpeed,
-      maxSpeed,
+      minDuration,
+      maxDuration,
       maxSpawnDelay,
     } = config;
 
@@ -49,7 +46,7 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
           targetPosition: { ...OWNSHIP_POSITION },
           word,
           attackIndex: 0,
-          speed: randomNumber(minSpeed, maxSpeed),
+          speed: randomNumber(minDuration, maxDuration),
           delay: randomNumber(0, maxSpawnDelay),
         };
         enemies[word] = enemy;
