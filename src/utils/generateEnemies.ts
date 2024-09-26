@@ -1,7 +1,7 @@
 import { CONFIG } from 'src/utils/config';
 import { Enemy, Dictionary } from 'src/types';
 import { WORDS } from 'src/utils/words';
-import { randomNumber, randomPosition } from 'src/utils/helpers';
+import { randomBoundaryPosition, randomNumber } from 'src/utils/helpers';
 import { OWNSHIP_POSITION } from 'src/utils/constants';
 
 export const generateEnemies = (wave: number): Dictionary<Enemy> => {
@@ -42,9 +42,11 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
       }
 
       if (word) {
+        const initialPosition = randomBoundaryPosition(7, 8);
+        console.log(initialPosition);
         const enemy: Enemy = {
           id: word,
-          initialPosition: { ...randomPosition(3.5, 4) },
+          initialPosition,
           targetPosition: { ...OWNSHIP_POSITION },
           word,
           attackIndex: 0,
