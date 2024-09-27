@@ -14,9 +14,14 @@ const Scene = () => {
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>(
     generateEnemies(wave)
   );
-  const [transition, setTransition] = useState<boolean>(true);
+  const [transition, setTransition] = useState<boolean>(false);
 
   console.log('Scene re-render');
+
+  const startGame = () => {
+    setPlay(true);
+    setTransition(true);
+  };
 
   const handleWaveEnd = () => {
     setTransition(true);
@@ -35,7 +40,11 @@ const Scene = () => {
       return (
         <>
           {transition ? (
-            <Transition text={`Wave ${wave}`} background="skyblue" />
+            <Transition
+              text={`Wave ${wave}`}
+              background="white"
+              color="black"
+            />
           ) : (
             <>
               <Ownship />
@@ -50,7 +59,7 @@ const Scene = () => {
       );
     }
 
-    return <Menu />;
+    return <Menu onPlay={startGame} />;
   };
 
   return (

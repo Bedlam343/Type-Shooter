@@ -50,18 +50,20 @@ const Enemy = forwardRef(
                 fontSize: 24,
               }}
             >
-              {attackIndex === 0
-                ? word
-                : word.split('').map((letter, index) => (
-                    <span
-                      key={`${letter}-${index}`}
-                      style={{
-                        color: index < attackIndex ? 'grey' : 'red',
-                      }}
-                    >
-                      {letter}
-                    </span>
-                  ))}
+              {attackIndex === 0 ? (
+                <span style={{ color: 'black' }}>{word}</span>
+              ) : (
+                word.split('').map((letter, index) => (
+                  <span
+                    key={`${letter}-${index}`}
+                    style={{
+                      color: index < attackIndex ? 'grey' : 'red',
+                    }}
+                  >
+                    {letter}
+                  </span>
+                ))
+              )}
             </Html>
           </animated.mesh>
         )}

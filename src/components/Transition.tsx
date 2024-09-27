@@ -5,9 +5,14 @@ import { useState } from 'react';
 type TransitionProps = {
   text: string;
   background?: string;
+  color?: string;
 };
 
-const Transition = ({ text, background = 'lightblue' }: TransitionProps) => {
+const Transition = ({
+  text,
+  background = 'lightblue',
+  color = 'black',
+}: TransitionProps) => {
   const [exit, setExit] = useState(false);
 
   const transition = useTransition(!exit, {
@@ -38,8 +43,9 @@ const Transition = ({ text, background = 'lightblue' }: TransitionProps) => {
                   background,
                   fontSize: 24,
                   textAlign: 'center',
-                  color: 'white',
+                  color,
                   width: 500,
+                  padding: '10px',
                 }}
               >
                 {text}

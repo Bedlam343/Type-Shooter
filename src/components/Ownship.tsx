@@ -5,7 +5,7 @@ const Ownship = () => {
   return (
     <mesh position={[x, y, z]}>
       <sphereGeometry args={[0.2]} />
-      <meshBasicMaterial color="orange" />
+      <meshBasicMaterial color="green" />
     </mesh>
   );
 };

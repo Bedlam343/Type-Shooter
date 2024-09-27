@@ -39,7 +39,7 @@ const Laser = ({ source, target, enemyPositions }: LaserProps) => {
   return (
     <mesh ref={meshRef}>
       <boxGeometry args={[1, 0.02, 0]} />
-      <meshBasicMaterial color="#e6c050" />
+      <meshBasicMaterial color="green" />
     </mesh>
   );
 };
