@@ -8,14 +8,14 @@ import { closestEnemyWithInitial } from 'src/utils/helpers';
 
 type WaveProps = {
   waveEnemies: Dictionary<Enemy>;
-  waveNumber: number;
-  onStart?: () => void;
-  onEnd: () => void;
+  onFailure: () => void;
+  onSuccess: () => void;
 };
 
-const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
+const Wave = ({ waveEnemies, onFailure, onSuccess }: WaveProps) => {
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>({ ...waveEnemies });
 
+  const ownshipCollisionRef = useRef<boolean>(false);
   const enemiesRef = useRef<Dictionary<Enemy>>({ ...waveEnemies });
   const currentEnemyRef = useRef<Enemy | null>(null);
   const enemyPositionsRef = useRef<Dictionary<Position>>({});
@@ -33,9 +33,16 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
 
   useEffect(() => {
     if (Object.keys(enemies).length === 0) {
-      onEnd();
+      onSuccess();
     }
-  }, [enemies, onEnd]);
+  }, [enemies, onSuccess]);
+
+  const handleOwnshipCollision = () => {
+    if (!ownshipCollisionRef.current) {
+      ownshipCollisionRef.current = true;
+      onFailure();
+    }
+  };
 
   const attack = useCallback((pressedKey: string, keySet: Set<string>) => {
     const key = pressedKey.toLowerCase();
@@ -106,7 +113,12 @@ const Wave = ({ waveNumber, waveEnemies, onStart, onEnd }: WaveProps) => {
   return (
     <>
       {Object.keys(enemies).map((key) => (
-        <EnemyUI key={key} enemy={enemies[key]} ref={enemyPositionsRef} />
+        <EnemyUI
+          key={key}
+          enemy={enemies[key]}
+          ref={enemyPositionsRef}
+          onCollision={handleOwnshipCollision}
+        />
       ))}
 
       <Laser

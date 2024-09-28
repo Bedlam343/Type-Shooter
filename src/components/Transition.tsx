@@ -6,12 +6,14 @@ type TransitionProps = {
   text: string;
   background?: string;
   color?: string;
+  duration?: number;
 };
 
 const Transition = ({
   text,
   background = 'lightblue',
   color = 'black',
+  duration = 500,
 }: TransitionProps) => {
   const [exit, setExit] = useState(false);
 
@@ -28,7 +30,7 @@ const Transition = ({
     exitBeforeEnter: true,
     onRest: () => setTimeout(() => setExit(true), 500),
     config: {
-      duration: 500,
+      duration,
     },
   });
 

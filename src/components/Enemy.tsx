@@ -2,13 +2,18 @@ import { animated, useSpring } from '@react-spring/three';
 import { Html } from '@react-three/drei';
 import { forwardRef, Ref, useState } from 'react';
 import { Dictionary, Enemy as EnemyType, Position } from 'src/types';
+import { OWNSHIP_RADIUS } from 'src/utils';
 
 type EnemyProps = {
   enemy: EnemyType;
+  onCollision: () => void;
 };
 
 const Enemy = forwardRef(
-  ({ enemy }: EnemyProps, enemyPositions: Ref<Dictionary<Position>>) => {
+  (
+    { enemy, onCollision }: EnemyProps,
+    enemyPositions: Ref<Dictionary<Position>>
+  ) => {
     const [animatedStarted, setAnimationStarted] = useState<boolean>(false);
 
     const { initialPosition, targetPosition, word, attackIndex, delay, speed } =
@@ -22,7 +27,8 @@ const Enemy = forwardRef(
       },
       to: { x: targetPosition.x, y: targetPosition.y, z: targetPosition.z },
       config: {
-        duration: speed, // 60 seconds
+        // duration: speed,
+        duration: 5000,
       },
       delay,
       onStart: () => setAnimationStarted(true),
@@ -34,6 +40,11 @@ const Enemy = forwardRef(
 
         // update position of enemy
         enemyPositions.current[word] = { x, y, z };
+
+        // check for collision with ownship
+        if (Math.abs(x) <= OWNSHIP_RADIUS && Math.abs(y) <= OWNSHIP_RADIUS) {
+          onCollision();
+        }
       },
     });
 

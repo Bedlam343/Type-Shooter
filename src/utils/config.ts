@@ -42,12 +42,21 @@ export const CONFIG: Config = {
     maxDuration: 50 * ONE_SEC_IN_MS,
     maxSpawnDelay: 7 * ONE_SEC_IN_MS,
   },
+  // long word wave
   6: {
-    numEnemies: 22,
-    minWordLength: 4,
-    maxWordLength: 7,
+    numEnemies: 10,
+    minWordLength: 13,
+    maxWordLength: 13,
     minDuration: 40 * ONE_SEC_IN_MS,
     maxDuration: 50 * ONE_SEC_IN_MS,
+    maxSpawnDelay: 5 * ONE_SEC_IN_MS,
+  },
+  8: {
+    numEnemies: 20,
+    minWordLength: 4,
+    maxWordLength: 8,
+    minDuration: 30 * ONE_SEC_IN_MS,
+    maxDuration: 45 * ONE_SEC_IN_MS,
     maxSpawnDelay: 8 * ONE_SEC_IN_MS,
   },
 };
