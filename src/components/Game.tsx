@@ -14,7 +14,7 @@ type GameProps = {
 type TransitionType = 'new-wave' | 'game-over' | null;
 
 const Game = ({ onEnd }: GameProps) => {
-  const [wave, setWave] = useState<number>(1);
+  const [wave, setWave] = useState<number>(13);
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>(
     generateEnemies(wave)
   );
