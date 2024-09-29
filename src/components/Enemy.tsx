@@ -27,8 +27,7 @@ const Enemy = forwardRef(
       },
       to: { x: targetPosition.x, y: targetPosition.y, z: targetPosition.z },
       config: {
-        // duration: speed,
-        duration: 5000,
+        duration: speed,
       },
       delay,
       onStart: () => setAnimationStarted(true),

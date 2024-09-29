@@ -26,12 +26,11 @@ export type Position = {
 };
 
 export type Config = {
-  [key: number]: {
-    numEnemies: number;
-    minWordLength: number;
-    maxWordLength: number;
-    minDuration: number;
-    maxDuration: number;
-    maxSpawnDelay: number;
-  };
+  numEnemies: number;
+  minWordLength: number;
+  maxWordLength: number;
+  minDuration: number;
+  maxDuration: number;
+  spawnInterval: number;
+  roundType: 'regular' | 'rapid' | 'long';
 };

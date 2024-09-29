@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local
 Notes.md
+words.json
+modifyWords.js
 
 # Editor directories and files
 .vscode/*

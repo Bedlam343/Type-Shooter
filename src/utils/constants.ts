@@ -8,3 +8,32 @@ export const OWNSHIP_POSITION: Position = {
 export const OWNSHIP_RADIUS = 0.2;
 
 export const ONE_SEC_IN_MS = 1000;
+
+export const LETTERS = [
+  'a',
+  'b',
+  'c',
+  'd',
+  'e',
+  'f',
+  'g',
+  'h',
+  'i',
+  'j',
+  'k',
+  'l',
+  'm',
+  'n',
+  'o',
+  'p',
+  'q',
+  'r',
+  's',
+  't',
+  'u',
+  'v',
+  'w',
+  'x',
+  'y',
+  'z',
+];
