@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Html } from '@react-three/drei';
 import { animated } from '@react-spring/web';
 import { Dictionary, Enemy } from 'src/types';
@@ -19,6 +19,7 @@ const Game = ({ onEnd }: GameProps) => {
     generateEnemies(wave)
   );
   const [transition, setTransition] = useState<TransitionType>('new-wave');
+  const [pause, setPause] = useState<boolean>(false);
 
   const handleWaveSuccess = () => {
     setTransition('new-wave');
@@ -29,6 +30,10 @@ const Game = ({ onEnd }: GameProps) => {
   const handleWaveFailure = () => {
     setTransition('game-over');
   };
+
+  const togglePause = useCallback(() => {
+    setPause((prevPause) => !prevPause);
+  }, []);
 
   useEffect(() => {
     if (transition === 'new-wave') {
@@ -61,6 +66,9 @@ const Game = ({ onEnd }: GameProps) => {
           waveEnemies={enemies}
           onFailure={handleWaveFailure}
           onSuccess={handleWaveSuccess}
+          onPause={togglePause}
+          onResume={togglePause}
+          pause={pause}
         />
       </>
     );

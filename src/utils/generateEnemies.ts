@@ -28,7 +28,6 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
       let word: string = '';
 
       nTries(() => {
-        console.log('outer-tries');
         let length: number | null = null;
         let letterIndex: number = -1;
         let letter: string | null = null;
@@ -40,8 +39,6 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
           length = randomNumber(minLength, maxLength);
           letterIndex = randomNumber(0, numLettersRemaining - 1);
           letter = Object.keys(availableLetters)[letterIndex];
-
-          console.log('inner-tries');
 
           if (!WORDS[length]) {
             return false;

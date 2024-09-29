@@ -8,11 +8,21 @@ import { closestEnemyWithInitial } from 'src/utils/helpers';
 
 type WaveProps = {
   waveEnemies: Dictionary<Enemy>;
+  pause: boolean;
   onFailure: () => void;
   onSuccess: () => void;
+  onPause: () => void;
+  onResume: () => void;
 };
 
-const Wave = ({ waveEnemies, onFailure, onSuccess }: WaveProps) => {
+const Wave = ({
+  waveEnemies,
+  pause,
+  onPause,
+  onResume,
+  onFailure,
+  onSuccess,
+}: WaveProps) => {
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>({ ...waveEnemies });
 
   const ownshipCollisionRef = useRef<boolean>(false);
@@ -44,69 +54,80 @@ const Wave = ({ waveEnemies, onFailure, onSuccess }: WaveProps) => {
     }
   };
 
-  const attack = useCallback((pressedKey: string, keySet: Set<string>) => {
-    const key = pressedKey.toLowerCase();
-    const keyCode = key.charCodeAt(0);
-    if (keySet.has(key)) return;
+  const attack = useCallback(
+    (pressedKey: string, keySet: Set<string>) => {
+      const key = pressedKey.toLowerCase();
+      const keyCode = key.charCodeAt(0);
+      if (keySet.has(key)) return;
 
-    if (key.length > 1 && key !== 'escape') return;
-    if (keyCode < 'a'.charCodeAt(0) || keyCode > 'z'.charCodeAt(0)) return;
-
-    let enemy: Enemy;
-    if (currentEnemyRef.current) {
-      // an enemy already under attack
-      if (key === 'escape') {
-        // disengage lock from enemy
-        const resetEnemy = { ...currentEnemyRef.current, attackIndex: 0 };
-        setEnemies((prevEnemies) => ({
-          ...prevEnemies,
-          [resetEnemy.word]: { ...resetEnemy },
-        }));
-        currentEnemyRef.current = null;
+      if (key === ' ') {
+        if (pause) onResume();
+        else onPause();
         return;
       }
 
-      enemy = currentEnemyRef.current;
-    } else {
-      // select new closest enemy starting with the pressed key
-      const closestEnemy = closestEnemyWithInitial(
-        key,
-        enemyPositionsRef.current
-      );
-      if (!closestEnemy) return;
-      enemy = enemiesRef.current[closestEnemy];
-    }
+      if (pause) return;
 
-    if (!enemy) {
-      console.error('Cant find enemy with letter', key, enemiesRef.current);
-      return;
-    }
+      if (key.length > 1 && key !== 'escape') return;
+      if (keyCode < 'a'.charCodeAt(0) || keyCode > 'z'.charCodeAt(0)) return;
 
-    const { attackIndex, word } = enemy;
+      let enemy: Enemy;
+      if (currentEnemyRef.current) {
+        // an enemy already under attack
+        if (key === 'escape') {
+          // disengage lock from enemy
+          const resetEnemy = { ...currentEnemyRef.current, attackIndex: 0 };
+          setEnemies((prevEnemies) => ({
+            ...prevEnemies,
+            [resetEnemy.word]: { ...resetEnemy },
+          }));
+          currentEnemyRef.current = null;
+          return;
+        }
 
-    if (word[attackIndex] === key) {
-      if (attackIndex + 1 === word.length) {
-        // all letters typed...destroy enemy
-        currentEnemyRef.current = null;
-        delete enemiesRef.current[word];
-        delete enemyPositionsRef.current[word];
-
-        setEnemies((prevEnemies) => {
-          const newEnemies = { ...prevEnemies };
-          delete newEnemies[word];
-          return newEnemies;
-        });
+        enemy = currentEnemyRef.current;
       } else {
-        // update attack index pertaining to the word
-        const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };
-        setEnemies((prevEnemies) => ({
-          ...prevEnemies,
-          [word]: updatedEnemy,
-        }));
-        currentEnemyRef.current = updatedEnemy;
+        // select new closest enemy starting with the pressed key
+        const closestEnemy = closestEnemyWithInitial(
+          key,
+          enemyPositionsRef.current
+        );
+        if (!closestEnemy) return;
+        enemy = enemiesRef.current[closestEnemy];
       }
-    }
-  }, []);
+
+      if (!enemy) {
+        console.error('Cant find enemy with letter', key, enemiesRef.current);
+        return;
+      }
+
+      const { attackIndex, word } = enemy;
+
+      if (word[attackIndex] === key) {
+        if (attackIndex + 1 === word.length) {
+          // all letters typed...destroy enemy
+          currentEnemyRef.current = null;
+          delete enemiesRef.current[word];
+          delete enemyPositionsRef.current[word];
+
+          setEnemies((prevEnemies) => {
+            const newEnemies = { ...prevEnemies };
+            delete newEnemies[word];
+            return newEnemies;
+          });
+        } else {
+          // update attack index pertaining to the word
+          const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };
+          setEnemies((prevEnemies) => ({
+            ...prevEnemies,
+            [word]: updatedEnemy,
+          }));
+          currentEnemyRef.current = updatedEnemy;
+        }
+      }
+    },
+    [pause, onResume, onPause]
+  );
 
   useKeyboard(attack);
 
@@ -118,6 +139,7 @@ const Wave = ({ waveEnemies, onFailure, onSuccess }: WaveProps) => {
           enemy={enemies[key]}
           ref={enemyPositionsRef}
           onCollision={handleOwnshipCollision}
+          pause={pause}
         />
       ))}
 

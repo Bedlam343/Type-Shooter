@@ -3272,7 +3272,6 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
       'saved',
       'saver',
       'saves',
-      'sbjct',
       'scale',
       'scary',
       'scene',

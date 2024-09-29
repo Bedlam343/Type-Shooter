@@ -1,23 +1,35 @@
-import { animated, useSpring } from '@react-spring/three';
+import { animated, useSpring, useSpringRef } from '@react-spring/three';
 import { Html } from '@react-three/drei';
-import { forwardRef, Ref, useState } from 'react';
+import { forwardRef, Ref, useEffect, useRef, useState } from 'react';
 import { Dictionary, Enemy as EnemyType, Position } from 'src/types';
 import { OWNSHIP_RADIUS } from 'src/utils';
 
 type EnemyProps = {
   enemy: EnemyType;
+  pause: boolean;
   onCollision: () => void;
 };
 
 const Enemy = forwardRef(
   (
-    { enemy, onCollision }: EnemyProps,
+    { enemy, pause, onCollision }: EnemyProps,
     enemyPositions: Ref<Dictionary<Position>>
   ) => {
-    const [animatedStarted, setAnimationStarted] = useState<boolean>(false);
-
     const { initialPosition, targetPosition, word, attackIndex, delay, speed } =
       enemy;
+
+    const springRef = useSpringRef();
+    const refs = useRef<{
+      timeoutId: NodeJS.Timeout | null;
+      startTime: number | null;
+      remainingDelay: number;
+    }>({
+      timeoutId: null,
+      startTime: null,
+      remainingDelay: delay,
+    });
+
+    const [animationStarted, setAnimationStarted] = useState<boolean>(false);
 
     const { x, y, z } = useSpring({
       from: {
@@ -29,8 +41,13 @@ const Enemy = forwardRef(
       config: {
         duration: speed,
       },
-      delay,
-      onStart: () => setAnimationStarted(true),
+      ref: springRef,
+      // delay,
+      onStart: () => {
+        if (!pause) {
+          setAnimationStarted(true);
+        }
+      },
       onChange(result) {
         const { value, finished, cancelled } = result;
         const { x, y, z } = value;
@@ -47,9 +64,34 @@ const Enemy = forwardRef(
       },
     });
 
+    useEffect(() => {
+      if (!animationStarted) {
+        if (pause) {
+          if (!refs.current.timeoutId || !refs.current.startTime) return;
+
+          const { timeoutId, startTime } = refs.current;
+          clearTimeout(timeoutId);
+
+          refs.current.remainingDelay = delay - (Date.now() - startTime);
+        } else {
+          const { remainingDelay } = refs.current;
+
+          refs.current.startTime = Date.now();
+
+          refs.current.timeoutId = setTimeout(
+            () => springRef.start(),
+            remainingDelay
+          );
+        }
+      } else {
+        if (pause) springRef.pause();
+        else springRef.resume();
+      }
+    }, [animationStarted, pause]);
+
     return (
       <>
-        {animatedStarted && (
+        {animationStarted && (
           <animated.mesh position-x={x} position-y={y} position-z={z}>
             <boxGeometry args={[0.3, 0.3, 0.3]} />
             <meshBasicMaterial color="white" />
