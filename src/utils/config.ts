@@ -163,4 +163,32 @@ export const CONFIG: Config[] = [
     spawnInterval: ONE_SEC_IN_MS / 1.5,
     roundType: 'rapid',
   },
+  // long words
+  {
+    numEnemies: 12,
+    minWordLength: 13,
+    maxWordLength: 13,
+    minDuration: 30 * ONE_SEC_IN_MS,
+    maxDuration: 30 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2,
+    roundType: 'long',
+  },
+  {
+    numEnemies: 22,
+    minWordLength: 6,
+    maxWordLength: 12,
+    minDuration: 30 * ONE_SEC_IN_MS,
+    maxDuration: 35 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  {
+    numEnemies: 22,
+    minWordLength: 6,
+    maxWordLength: 12,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 35 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
 ];
