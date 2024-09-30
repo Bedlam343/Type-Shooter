@@ -3613,7 +3613,7 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
       'wrong',
       'wrote',
     ],
-    x: ['xanax', 'xerox', 'xhtml'],
+    x: ['xanax', 'xerox'],
     y: [
       'yacht',
       'yahoo',

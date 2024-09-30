@@ -124,6 +124,7 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
     }
   } else {
     console.error('Configuration not found for wave', wave);
+    // generate configuration dynamically...
   }
 
   return enemies;

@@ -153,7 +153,7 @@ export const CONFIG: Config[] = [
     spawnInterval: ONE_SEC_IN_MS / 2,
     roundType: 'regular',
   },
-  // rapid fire (17)
+  // rapid fire
   {
     numEnemies: 13,
     minWordLength: 5,
@@ -190,5 +190,63 @@ export const CONFIG: Config[] = [
     maxDuration: 35 * ONE_SEC_IN_MS,
     spawnInterval: ONE_SEC_IN_MS / 2.2,
     roundType: 'regular',
+  },
+  // rapid fire
+  {
+    numEnemies: 13,
+    minWordLength: 6,
+    maxWordLength: 6,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.5,
+    roundType: 'rapid',
+  },
+  // long words
+  {
+    numEnemies: 12,
+    minWordLength: 13,
+    maxWordLength: 13,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2,
+    roundType: 'long',
+  },
+  {
+    numEnemies: 22,
+    minWordLength: 6,
+    maxWordLength: 12,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 30 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  {
+    numEnemies: 22,
+    minWordLength: 7,
+    maxWordLength: 12,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 30 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire
+  {
+    numEnemies: 15,
+    minWordLength: 6,
+    maxWordLength: 6,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.5,
+    roundType: 'rapid',
+  },
+  // long words
+  {
+    numEnemies: 15,
+    minWordLength: 13,
+    maxWordLength: 13,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2,
+    roundType: 'long',
   },
 ];
