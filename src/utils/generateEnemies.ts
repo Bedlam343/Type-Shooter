@@ -106,7 +106,7 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
       }, 3); */
 
       if (word) {
-        const initialPosition = randomBoundaryPosition(7, 8);
+        const initialPosition = randomBoundaryPosition(140, 160);
         const enemy: Enemy = {
           id: word,
           initialPosition,

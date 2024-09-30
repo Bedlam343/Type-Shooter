@@ -93,7 +93,7 @@ const Enemy = forwardRef(
       <>
         {animationStarted && (
           <animated.mesh position-x={x} position-y={y} position-z={z}>
-            <boxGeometry args={[0.3, 0.3, 0.3]} />
+            <boxGeometry args={[5, 5, 5]} />
             <meshBasicMaterial color="white" />
 
             <Html

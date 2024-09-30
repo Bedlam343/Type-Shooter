@@ -33,7 +33,7 @@ export const randomBoundaryPosition = (
       throw new Error('Invalid Boundary Position');
   }
 
-  return { x: x - 3.5, y: y - 4, z: 0 };
+  return { x: x - width / 2, y: y - height / 2, z: 0 };
 };
 
 export const randomNumber = (min: number, max: number): number => {

@@ -5,7 +5,7 @@ export const OWNSHIP_POSITION: Position = {
   y: 0,
   z: 0,
 };
-export const OWNSHIP_RADIUS = 0.2;
+export const OWNSHIP_RADIUS = 5;
 
 export const ONE_SEC_IN_MS = 1000;
 

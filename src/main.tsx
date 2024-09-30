@@ -10,9 +10,9 @@ root.render(
     gl={{ alpha: true }} // scene background color transparent
     orthographic
     camera={{
-      zoom: 100,
-      position: [0, 0, 100],
-      // position: [1, -6, 0],
+      zoom: 5,
+      // position: [0, 0, 100],
+      position: [0, 0, 6],
     }}
   >
     <Scene />
