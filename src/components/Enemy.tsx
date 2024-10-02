@@ -1,8 +1,11 @@
 import { animated, useSpring, useSpringRef } from '@react-spring/three';
 import { Html } from '@react-three/drei';
-import { forwardRef, Ref, useEffect, useRef, useState } from 'react';
+import { useLoader } from '@react-three/fiber';
+import * as THREE from 'three';
+import { forwardRef, Ref, useEffect, useMemo, useRef, useState } from 'react';
 import { Dictionary, Enemy as EnemyType, Position } from 'src/types';
 import { OWNSHIP_RADIUS } from 'src/utils';
+import { randomNumber } from 'src/utils/helpers';
 
 type EnemyProps = {
   enemy: EnemyType;
@@ -64,6 +67,13 @@ const Enemy = forwardRef(
       },
     });
 
+    const shipNumber = useMemo(() => randomNumber(1, 9), []);
+
+    const texture = useLoader(
+      THREE.TextureLoader,
+      `./ships/ship_${shipNumber}.png`
+    );
+
     useEffect(() => {
       if (!animationStarted) {
         if (pause) {
@@ -93,36 +103,36 @@ const Enemy = forwardRef(
       <>
         {animationStarted && (
           <animated.mesh position-x={x} position-y={y} position-z={z}>
-            <boxGeometry args={[5, 5, 5]} />
-            <meshBasicMaterial color="white" />
+            <boxGeometry args={[6, 6, 6]} />
+            <meshBasicMaterial map={texture} />
 
             <Html
               style={{
-                transform: 'translate(-50%, -50%)',
+                transform: 'translate(-50%, 0%)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: 24,
               }}
             >
-              {/* <div
+              <div
                 style={{
                   position: 'absolute',
-                  background: '#efeeee',
-                  opacity: '50%',
+                  background: 'black',
+                  opacity: '30%',
                   width: '100%',
                   height: '100%',
                   zIndex: -1,
                 }}
-              /> */}
+              />
               {attackIndex === 0 ? (
-                <span style={{ color: 'black' }}>{word}</span>
+                <span style={{ color: 'white' }}>{word}</span>
               ) : (
                 word.split('').map((letter, index) => (
                   <span
                     key={`${letter}-${index}`}
                     style={{
-                      color: index < attackIndex ? 'grey' : 'red',
+                      color: index < attackIndex ? 'grey' : 'orangered',
                     }}
                   >
                     {letter}
