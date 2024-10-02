@@ -1983,7 +1983,6 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
       'sent',
       'sept',
       'sets',
-      'sexo',
       'sexy',
       'shaw',
       'shed',
@@ -10003,7 +10002,6 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
     m: [
       'manufactured',
       'manufacturer',
-      'masturbation',
       'mathematical',
       'measurements',
       'metropolitan',

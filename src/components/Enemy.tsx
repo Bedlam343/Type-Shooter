@@ -112,7 +112,8 @@ const Enemy = forwardRef(
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                fontSize: 24,
+                fontSize: 22,
+                fontFamily: 'monospace',
               }}
             >
               <div
