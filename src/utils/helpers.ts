@@ -54,6 +54,7 @@ export const closestEnemyWithInitial = (
 ): string | null => {
   let closestEnemy: string | null = null;
   let smallestDistance: number = Infinity;
+
   Object.keys(enemyPositions).forEach((word) => {
     if (word[0] === initial) {
       const currDistance = distanceToOwnship(enemyPositions[word]);

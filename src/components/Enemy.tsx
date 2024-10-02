@@ -99,9 +99,22 @@ const Enemy = forwardRef(
             <Html
               style={{
                 transform: 'translate(-50%, -50%)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
                 fontSize: 24,
               }}
             >
+              {/* <div
+                style={{
+                  position: 'absolute',
+                  background: '#efeeee',
+                  opacity: '50%',
+                  width: '100%',
+                  height: '100%',
+                  zIndex: -1,
+                }}
+              /> */}
               {attackIndex === 0 ? (
                 <span style={{ color: 'black' }}>{word}</span>
               ) : (
