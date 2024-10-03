@@ -1,10 +1,8 @@
-import { animated, useSpring } from '@react-spring/three';
+import { useSpring } from '@react-spring/three';
 import { useFrame } from '@react-three/fiber';
 import { RapierRigidBody, RigidBody } from '@react-three/rapier';
 import { useRef } from 'react';
 import { Bullet as BulletType } from 'src/types';
-
-const AnimatedRigidBody = animated(RigidBody);
 
 type BulletProps = {
   bullet: BulletType;

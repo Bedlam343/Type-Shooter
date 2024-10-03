@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 type LaserProps = {
   source: Position;
-  target: string;
+  target: string | undefined;
   enemyPositions: Ref<Dictionary<Position>>;
 };
 
@@ -13,7 +13,7 @@ const Laser = ({ source, target, enemyPositions }: LaserProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame(() => {
-    if (!meshRef.current) return;
+    if (!meshRef.current || !target) return;
 
     // @ts-expect-error ...
     const targetPos = enemyPositions?.current[target];

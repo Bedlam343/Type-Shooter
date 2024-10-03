@@ -21,7 +21,7 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
       minDuration,
       maxDuration,
       spawnInterval,
-      roundType,
+      // roundType,
     } = config;
 
     for (let i = 0; i < numEnemies; ++i) {
