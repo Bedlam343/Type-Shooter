@@ -239,7 +239,7 @@ export const CONFIG: Config[] = [
     spawnInterval: ONE_SEC_IN_MS / 1.5,
     roundType: 'rapid',
   },
-  // long words
+  // long words (26)
   {
     numEnemies: 15,
     minWordLength: 13,

@@ -4292,7 +4292,6 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
       'impact',
       'import',
       'impose',
-      'incest',
       'inches',
       'income',
       'indeed',
@@ -4340,13 +4339,10 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
     ],
     k: [
       'kansas',
-      'kelkoo',
       'kernel',
       'kidney',
-      'kijiji',
       'killed',
       'killer',
-      'kinase',
       'knight',
       'knives',
       'korean',
@@ -5163,7 +5159,7 @@ export const WORDS: { [key: number]: { [key: string]: string[] } } = {
     ],
     x: ['xander'],
     y: ['yamaha', 'yearly', 'yellow', 'yields'],
-    z: ['zambia', 'zoloft', 'zoning', 'zshops'],
+    z: ['zambia', 'zoloft', 'zoning'],
   },
   7: {
     a: [

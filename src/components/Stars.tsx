@@ -5,14 +5,28 @@ import * as THREE from 'three';
 
 type StarsProps = {
   move?: boolean;
+  speed?: 'slow' | 'medium' | 'fast';
 };
 
-const Stars = ({ move = false }: StarsProps) => {
+function getSpeed(speed: string) {
+  switch (speed) {
+    case 'slow':
+      return 0.003;
+    case 'medium':
+      return 0.007;
+    case 'fast':
+      return 0.01;
+    default:
+      return 0.003;
+  }
+}
+
+const Stars = ({ move = false, speed = 'slow' }: StarsProps) => {
   const starsRef = useRef<THREE.Points>(null);
 
   useFrame((_, delta) => {
     if (starsRef.current && move) {
-      starsRef.current.rotation.y += delta * 0.003;
+      starsRef.current.rotation.y += delta * getSpeed(speed);
     }
   });
 
