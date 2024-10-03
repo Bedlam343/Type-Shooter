@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { OrbitControls } from '@react-three/drei';
 import Menu from 'src/components/Menu';
 import Stars from 'src/components/Stars';
 import Game from 'src/components/Game';
@@ -17,8 +16,6 @@ const Scene = () => {
 
   return (
     <>
-      <OrbitControls />
-
       <Stars move={true} />
 
       {play ? <Game onEnd={endGame} /> : <Menu onPlay={startGame} />}
