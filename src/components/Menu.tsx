@@ -39,6 +39,12 @@ const Menu = ({ onPlay }: MenuProps) => {
           <span className="controls-span">kill the enemy</span>.
         </p>
 
+        <p className="controls-description">
+          <span className="controls-span">To pause</span> and take a much needed
+          break in the middle of a wave,{' '}
+          <span className="controls-span">press space</span>.
+        </p>
+
         <button
           onClick={toggleControls}
           className="return-button"

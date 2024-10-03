@@ -6,14 +6,17 @@ import { generateEnemies } from 'src/utils';
 import Transition from 'src/components/Transition';
 import Ownship from 'src/components/Ownship';
 import Wave from 'src/components/Wave';
+import Pause from 'src/components/Pause';
 
 type GameProps = {
   onEnd: () => void;
+  onPause: () => void;
+  onResume: () => void;
 };
 
 type TransitionType = 'new-wave' | 'game-over' | 'game-won' | null;
 
-const Game = ({ onEnd }: GameProps) => {
+const Game = ({ onEnd, onPause, onResume }: GameProps) => {
   const [wave, setWave] = useState<number>(1);
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>(
     generateEnemies(wave)
@@ -39,6 +42,16 @@ const Game = ({ onEnd }: GameProps) => {
   const togglePause = useCallback(() => {
     setPause((prevPause) => !prevPause);
   }, []);
+
+  useEffect(() => {
+    if (transition === 'new-wave' && wave === 1) return;
+
+    if (pause) {
+      onPause();
+    } else {
+      onResume();
+    }
+  }, [pause]);
 
   useEffect(() => {
     if (transition === 'new-wave') {
@@ -88,6 +101,8 @@ const Game = ({ onEnd }: GameProps) => {
           onResume={togglePause}
           pause={pause}
         />
+
+        {pause && <Pause />}
       </>
     );
   };

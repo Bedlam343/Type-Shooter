@@ -37,6 +37,7 @@ const Stars = ({ move = false, speed = 'slow' }: StarsProps) => {
       count={10_000}
       factor={6}
       saturation={0}
+      speed={move ? 1 : 0}
       fade={false}
     />
   );
