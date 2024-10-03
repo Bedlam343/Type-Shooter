@@ -55,7 +55,7 @@ const Menu = ({ onPlay }: MenuProps) => {
       className="menu-container"
       style={{ transform: 'translate(-50%, -50%)' }}
     >
-      <h1 className="title">Word Shooter</h1>
+      <h1 className="title">Type Shooter</h1>
 
       {render()}
     </Html>
