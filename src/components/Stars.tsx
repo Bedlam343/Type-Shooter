@@ -33,7 +33,7 @@ const Stars = ({ move = false, speed = 'slow' }: StarsProps) => {
   return (
     <DreiStars
       ref={starsRef}
-      radius={100}
+      radius={150}
       count={10_000}
       factor={6}
       saturation={0}

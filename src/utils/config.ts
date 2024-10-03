@@ -239,7 +239,7 @@ export const CONFIG: Config[] = [
     spawnInterval: ONE_SEC_IN_MS / 1.5,
     roundType: 'rapid',
   },
-  // long words (26)
+  // long words
   {
     numEnemies: 15,
     minWordLength: 13,
@@ -248,5 +248,743 @@ export const CONFIG: Config[] = [
     maxDuration: 25 * ONE_SEC_IN_MS,
     spawnInterval: ONE_SEC_IN_MS / 2,
     roundType: 'long',
+  },
+  {
+    numEnemies: 22,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 30 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  {
+    numEnemies: 22,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 28 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (29)
+  {
+    numEnemies: 15,
+    minWordLength: 6,
+    maxWordLength: 7,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.5,
+    roundType: 'rapid',
+  },
+  // long words (30)
+  {
+    numEnemies: 15,
+    minWordLength: 13,
+    maxWordLength: 14,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2,
+    roundType: 'long',
+  },
+  // (31)
+  {
+    numEnemies: 22,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 28 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (32)
+  {
+    numEnemies: 22,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (33)
+  {
+    numEnemies: 15,
+    minWordLength: 7,
+    maxWordLength: 7,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.5,
+    roundType: 'rapid',
+  },
+  // long words (34)
+  {
+    numEnemies: 15,
+    minWordLength: 13,
+    maxWordLength: 14,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (35)
+  {
+    numEnemies: 22,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 23 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (36)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 23 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (37)
+  {
+    numEnemies: 15,
+    minWordLength: 7,
+    maxWordLength: 7,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (38)
+  {
+    numEnemies: 15,
+    minWordLength: 13,
+    maxWordLength: 15,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (39)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 21 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (40)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 21 * ONE_SEC_IN_MS,
+    maxDuration: 23 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (41)
+  {
+    numEnemies: 16,
+    minWordLength: 7,
+    maxWordLength: 7,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (42)
+  {
+    numEnemies: 16,
+    minWordLength: 13,
+    maxWordLength: 15,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (43)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 21 * ONE_SEC_IN_MS,
+    maxDuration: 23 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (44)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 20 * ONE_SEC_IN_MS,
+    maxDuration: 23 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (45)
+  {
+    numEnemies: 17,
+    minWordLength: 7,
+    maxWordLength: 7,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (46)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 15,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (47)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 20 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'regular',
+  },
+  // (48)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 20 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (49)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 6 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (50)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 25 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (51)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 18 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (52)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 16 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (53)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 6 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (54)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 23 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (55)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 18 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (56)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (57)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5.5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (58)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 21 * ONE_SEC_IN_MS,
+    maxDuration: 25 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (59)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (60)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (61)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (62)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 21 * ONE_SEC_IN_MS,
+    maxDuration: 23 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (63)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (64)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (65)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.6,
+    roundType: 'rapid',
+  },
+  // long words (66)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 21 * ONE_SEC_IN_MS,
+    maxDuration: 23 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (67)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (68)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (69)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.7,
+    roundType: 'rapid',
+  },
+  // long words (70)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 20 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (71)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (72)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (73)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.7,
+    roundType: 'rapid',
+  },
+  // long words (74)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 18,
+    minDuration: 20 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (75)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 13 * ONE_SEC_IN_MS,
+    maxDuration: 15 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // (76)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 13 * ONE_SEC_IN_MS,
+    maxDuration: 13 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'regular',
+  },
+  // rapid fire (77)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.8,
+    roundType: 'rapid',
+  },
+  // long words (78)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 22,
+    minDuration: 20 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (79)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 13,
+    minDuration: 13 * ONE_SEC_IN_MS,
+    maxDuration: 13 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // (80)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 14,
+    minDuration: 13 * ONE_SEC_IN_MS,
+    maxDuration: 13 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // rapid fire (81)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 4.8 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.8,
+    roundType: 'rapid',
+  },
+  // long words (82)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 22,
+    minDuration: 18 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (83)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 14,
+    minDuration: 12 * ONE_SEC_IN_MS,
+    maxDuration: 13 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // (84)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 14,
+    minDuration: 11 * ONE_SEC_IN_MS,
+    maxDuration: 13 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // rapid fire (85)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 4.5 * ONE_SEC_IN_MS,
+    maxDuration: 5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.8,
+    roundType: 'rapid',
+  },
+  // long words (86)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 22,
+    minDuration: 16 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.1,
+    roundType: 'long',
+  },
+  // (87)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 14,
+    minDuration: 11 * ONE_SEC_IN_MS,
+    maxDuration: 12 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // (88)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 14,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 12 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // rapid fire (89)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 4.5 * ONE_SEC_IN_MS,
+    maxDuration: 4.5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.8,
+    roundType: 'rapid',
+  },
+  // long words (90)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 22,
+    minDuration: 16 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'long',
+  },
+  // (91)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 15,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 10 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.3,
+    roundType: 'regular',
+  },
+  // (92)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 15,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 10 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.4,
+    roundType: 'regular',
+  },
+  // rapid fire (93)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 4 * ONE_SEC_IN_MS,
+    maxDuration: 4.5 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.8,
+    roundType: 'rapid',
+  },
+  // long words (94)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 22,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.2,
+    roundType: 'long',
+  },
+  // (95)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 15,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 10 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.4,
+    roundType: 'regular',
+  },
+  // (96)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 16,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 10 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.4,
+    roundType: 'regular',
+  },
+  // rapid fire (97)
+  {
+    numEnemies: 17,
+    minWordLength: 8,
+    maxWordLength: 8,
+    minDuration: 4 * ONE_SEC_IN_MS,
+    maxDuration: 4 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 1.8,
+    roundType: 'rapid',
+  },
+  // long words (98)
+  {
+    numEnemies: 17,
+    minWordLength: 13,
+    maxWordLength: 22,
+    minDuration: 15 * ONE_SEC_IN_MS,
+    maxDuration: 20 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.4,
+    roundType: 'long',
+  },
+  // (99)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 16,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 10 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.5,
+    roundType: 'regular',
+  },
+  // (100)
+  {
+    numEnemies: 23,
+    minWordLength: 7,
+    maxWordLength: 22,
+    minDuration: 10 * ONE_SEC_IN_MS,
+    maxDuration: 10 * ONE_SEC_IN_MS,
+    spawnInterval: ONE_SEC_IN_MS / 2.5,
+    roundType: 'regular',
   },
 ];

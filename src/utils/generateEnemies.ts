@@ -78,33 +78,6 @@ export const generateEnemies = (wave: number): Dictionary<Enemy> => {
         return false;
       }, 3);
 
-      /* nTries(() => {
-        let length: number = -1;
-        while (!WORDS[length]) {
-          // make sure index is valid
-          length = randomNumber(minWordLength, maxWordLength);
-        }
-
-        const letterIndex = randomNumber(0, numLettersRemaining - 1);
-        const letter = Object.keys(availableLetters)[letterIndex];
-
-        // words starting with the value of letter
-        const words = WORDS[length][letter];
-
-        const index = randomNumber(0, words.length - 1);
-
-        if (!enemies[words[index]]) {
-          // if word not alreadt assigned to another enemy, take it
-          word = words[index];
-
-          delete availableLetters[letter];
-          --numLettersRemaining;
-
-          return true;
-        }
-        return false;
-      }, 3); */
-
       if (word) {
         const initialPosition = randomBoundaryPosition(140, 160);
         const enemy: Enemy = {
