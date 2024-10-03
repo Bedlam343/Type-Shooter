@@ -5,7 +5,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Courier New', Courier, monospace;
+}
+
+.title {
+  font-size: 40px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 20px;
 }
 
 .play-button {
@@ -22,4 +34,51 @@
 .play-button:hover {
   cursor: pointer;
   background-color: rgb(61, 61, 61);
+}
+
+.controls-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  background: white;
+  padding: 5px 1px 5px 1px;
+}
+
+.controls-button:hover {
+  cursor: pointer;
+}
+
+.controls-container {
+  padding: 0px 20px;
+  text-align: center;
+}
+
+.controls-title {
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+}
+
+.controls-description {
+  font-family: cursive;
+}
+
+.controls-span {
+  color: firebrick;
+}
+
+.return-button {
+  color: white;
+  background-color: rgb(81, 81, 81);
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 10px 20px 10px 20px;
+}
+
+.return-button:hover {
+  cursor: pointer;
 }
