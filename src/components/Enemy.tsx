@@ -55,9 +55,11 @@ const Enemy = forwardRef(
         const { value } = result;
         const { x, y, z } = value;
 
+        // @ts-expect-error ...
         if (!enemyPositions || !enemyPositions.current[word]) return;
 
         // update position of enemy
+        // @ts-expect-error ...
         enemyPositions.current[word] = { x, y, z };
 
         // check for collision with ownship
