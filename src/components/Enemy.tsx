@@ -1,6 +1,6 @@
 import { animated, useSpring, useSpringRef } from '@react-spring/three';
 import { Html } from '@react-three/drei';
-import { useFrame, useLoader } from '@react-three/fiber';
+import { useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
 import { forwardRef, Ref, useEffect, useMemo, useRef, useState } from 'react';
 import { Dictionary, Enemy as EnemyType, Position } from 'src/types';
