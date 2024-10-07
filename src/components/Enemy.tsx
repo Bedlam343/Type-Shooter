@@ -1,6 +1,6 @@
 import { animated, useSpring, useSpringRef } from '@react-spring/three';
 import { Html } from '@react-three/drei';
-import { useLoader } from '@react-three/fiber';
+import { useFrame, useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
 import { forwardRef, Ref, useEffect, useMemo, useRef, useState } from 'react';
 import { Dictionary, Enemy as EnemyType, Position } from 'src/types';
@@ -76,6 +76,14 @@ const Enemy = forwardRef(
       `./ships/ship_${shipNumber}.png`
     );
 
+    const rotation = useMemo(() => {
+      const angle = Math.atan2(
+        targetPosition.y - initialPosition.y,
+        targetPosition.x - initialPosition.x
+      );
+      return angle - Math.PI / 2;
+    }, []);
+
     useEffect(() => {
       if (!animationStarted) {
         if (pause) {
@@ -104,7 +112,12 @@ const Enemy = forwardRef(
     return (
       <>
         {animationStarted && (
-          <animated.mesh position-x={x} position-y={y} position-z={z}>
+          <animated.mesh
+            rotation={[0, 0, rotation]}
+            position-x={x}
+            position-y={y}
+            position-z={z}
+          >
             <boxGeometry args={[6, 6, 6]} />
             <meshBasicMaterial map={texture} />
 
