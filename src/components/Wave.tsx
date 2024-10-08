@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import useKeyboard from 'src/hooks/useKeyboard';
+import useSound from 'use-sound';
 import EnemyUI from 'src/components/Enemy';
 import Laser from 'src/components/Laser';
+import useKeyboard from 'src/hooks/useKeyboard';
 import { Dictionary, Enemy, Position } from 'src/types';
 import { OWNSHIP_POSITION } from 'src/utils/constants';
 import { closestEnemyWithInitial } from 'src/utils/helpers';
 
 type WaveProps = {
   waveEnemies: Dictionary<Enemy>;
+  laserVolume: number;
   pause: boolean;
   onFailure: () => void;
   onSuccess: () => void;
@@ -17,6 +19,7 @@ type WaveProps = {
 
 const Wave = ({
   waveEnemies,
+  laserVolume,
   pause,
   onPause,
   onResume,
@@ -24,6 +27,10 @@ const Wave = ({
   onSuccess,
 }: WaveProps) => {
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>({ ...waveEnemies });
+
+  const [playLaserSound] = useSound('laser1.mp3', {
+    volume: laserVolume,
+  });
 
   const ownshipCollisionRef = useRef<boolean>(false);
   const enemiesRef = useRef<Dictionary<Enemy>>({ ...waveEnemies });
@@ -124,9 +131,11 @@ const Wave = ({
           }));
           currentEnemyRef.current = updatedEnemy;
         }
+
+        playLaserSound();
       }
     },
-    [pause, onResume, onPause]
+    [pause, onResume, onPause, playLaserSound]
   );
 
   useKeyboard(attack);

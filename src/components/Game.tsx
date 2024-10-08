@@ -12,11 +12,12 @@ type GameProps = {
   onEnd: () => void;
   onPause: () => void;
   onResume: () => void;
+  volume: number;
 };
 
 type TransitionType = 'new-wave' | 'game-over' | 'game-won' | null;
 
-const Game = ({ onEnd, onPause, onResume }: GameProps) => {
+const Game = ({ onEnd, onPause, onResume, volume }: GameProps) => {
   const [wave, setWave] = useState<number>(1);
   const [enemies, setEnemies] = useState<Dictionary<Enemy>>(
     generateEnemies(wave)
@@ -95,6 +96,7 @@ const Game = ({ onEnd, onPause, onResume }: GameProps) => {
         <Ownship />
         <Wave
           waveEnemies={enemies}
+          laserVolume={volume}
           onFailure={handleWaveFailure}
           onSuccess={handleWaveSuccess}
           onPause={togglePause}

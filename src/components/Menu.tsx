@@ -1,16 +1,28 @@
 import { Html } from '@react-three/drei';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import 'src/components/Menu.css';
 
 type MenuProps = {
   onPlay: () => void;
+  onVolumeChange: (volume: number) => void;
+  volume: number;
 };
 
-const Menu = ({ onPlay }: MenuProps) => {
+const Menu = ({ onPlay, volume, onVolumeChange }: MenuProps) => {
   const [showControls, setShowControls] = useState<boolean>(false);
+  const volumeImgSrc =
+    volume === 0
+      ? 'no_volume.png'
+      : volume <= 0.5
+      ? 'volume_down.png'
+      : 'volume_up.png';
 
   const toggleControls = () => {
     setShowControls((currControls) => !currControls);
+  };
+
+  const handleVolumeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onVolumeChange(Number(event.target.value));
   };
 
   const render = () => {
@@ -24,6 +36,19 @@ const Menu = ({ onPlay }: MenuProps) => {
           <button onClick={toggleControls} className="controls-button">
             Controls
           </button>
+
+          <div className="volume-container">
+            <img className="volume-image" src={volumeImgSrc} />
+            <input
+              className="volume-slider"
+              type="range"
+              max={1}
+              min={0}
+              step={0.1}
+              value={volume}
+              onChange={handleVolumeChange}
+            />
+          </div>
         </div>
       );
     }

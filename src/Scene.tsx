@@ -6,6 +6,7 @@ import Game from 'src/components/Game';
 const Scene = () => {
   const [play, setPlay] = useState<boolean>(false);
   const [moveStars, setMoveStars] = useState<boolean>(true);
+  const [volume, setVolume] = useState<number>(0.5);
 
   const startGame = () => {
     setPlay(true);
@@ -19,6 +20,10 @@ const Scene = () => {
     setMoveStars((prevStars) => !prevStars);
   };
 
+  const handleVolumeChange = (newVolume: number) => {
+    setVolume(newVolume);
+  };
+
   return (
     <>
       <Stars move={moveStars} />
@@ -28,9 +33,14 @@ const Scene = () => {
           onEnd={endGame}
           onPause={toggleMoveStars}
           onResume={toggleMoveStars}
+          volume={volume}
         />
       ) : (
-        <Menu onPlay={startGame} />
+        <Menu
+          onPlay={startGame}
+          volume={volume}
+          onVolumeChange={handleVolumeChange}
+        />
       )}
     </>
   );
