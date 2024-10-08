@@ -31,6 +31,9 @@ const Wave = ({
   const [playLaserSound] = useSound('laser1.mp3', {
     volume: laserVolume,
   });
+  const [playNoLaserSound] = useSound('no_laser.mp3', {
+    volume: laserVolume > 0 ? laserVolume + 0.5 : 0,
+  });
 
   const ownshipCollisionRef = useRef<boolean>(false);
   const enemiesRef = useRef<Dictionary<Enemy>>({ ...waveEnemies });
@@ -99,11 +102,15 @@ const Wave = ({
           key,
           enemyPositionsRef.current
         );
-        if (!closestEnemy) return;
+        if (!closestEnemy) {
+          playNoLaserSound();
+          return;
+        }
         enemy = enemiesRef.current[closestEnemy];
       }
 
       if (!enemy) {
+        playNoLaserSound();
         console.error('Cant find enemy with letter', key, enemiesRef.current);
         return;
       }
@@ -133,9 +140,11 @@ const Wave = ({
         }
 
         playLaserSound();
+      } else {
+        playNoLaserSound();
       }
     },
-    [pause, onResume, onPause, playLaserSound]
+    [pause, onResume, onPause, playLaserSound, playNoLaserSound]
   );
 
   useKeyboard(attack);
