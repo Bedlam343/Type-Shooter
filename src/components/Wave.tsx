@@ -34,6 +34,9 @@ const Wave = ({
   const [playNoLaserSound] = useSound('no_laser.mp3', {
     volume: laserVolume > 0 ? laserVolume + 0.5 : 0,
   });
+  const [playExplosionSound] = useSound('explosion.wav', {
+    volume: laserVolume <= 0.5 ? Math.min(0.2, laserVolume) : 0.6,
+  });
 
   const ownshipCollisionRef = useRef<boolean>(false);
   const enemiesRef = useRef<Dictionary<Enemy>>({ ...waveEnemies });
@@ -129,6 +132,8 @@ const Wave = ({
             delete newEnemies[word];
             return newEnemies;
           });
+
+          playExplosionSound();
         } else {
           // update attack index pertaining to the word
           const updatedEnemy = { ...enemy, attackIndex: attackIndex + 1 };
@@ -144,7 +149,14 @@ const Wave = ({
         playNoLaserSound();
       }
     },
-    [pause, onResume, onPause, playLaserSound, playNoLaserSound]
+    [
+      pause,
+      onResume,
+      onPause,
+      playLaserSound,
+      playNoLaserSound,
+      playExplosionSound,
+    ]
   );
 
   useKeyboard(attack);
